@@ -1,0 +1,23 @@
+# Temporary files
+Thumbs.db
+.DS_Store
+*~
+
+# Node.js modules
+node_modules/
+
+# TypeScript defenitions
+typings/
+
+# Compiled TypeScript sources
+src/**/*.js
+src/**/*.js.map
+built/
+
+# JetBrains IDE
+.idea
+
+# Logs
+npm-debug.log
+debug.log
+

@@ -1,0 +1,26 @@
+{
+  "name": "texture-helper",
+  "productName": "TextureHelper",
+  "version": "0.1.0-dev",
+  "description": "Completely free and open source texture packer.",
+  "main": "./src/browser/main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "build": "./node_modules/.bin/gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nuevogaming/texture-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nuevogaming/texture-helper/issues"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.0.2",
+    "electron-prebuilt": "^0.34.3",
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.9.2"
+  }
+}
