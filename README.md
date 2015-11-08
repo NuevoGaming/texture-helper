@@ -11,18 +11,24 @@ You are free to contribute to TextureHelper.
 ## Building
 
 First of all install npm and Node.js from [nodejs.org](https://nodejs.org).
-Then install project dependencies and [TypeScript type definitions](http://definitelytyped.org):
+Install project dependencies
 
 ```bash
 > npm install
+```
+
+Install [TypeScript type definitions](http://definitelytyped.org):
+
+```bash
 > sudo npm install -g tsd
 > tsd install
 ```
 
-Build source:
+Install [gulp](http://gulpjs.com) and build source:
 
 ```bash
-> npm build
+> sudo npm install -g gulp
+> gulp
 ```
 
 And finally run Electron (aka Atom Shell):

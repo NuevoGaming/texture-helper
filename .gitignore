@@ -17,6 +17,10 @@ built/
 # JetBrains IDE
 .idea
 
+# Apple Xcode
+*.xcodeproj
+*.xcworkspace
+
 # Logs
 npm-debug.log
 debug.log
