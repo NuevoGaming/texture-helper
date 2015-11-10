@@ -3,7 +3,7 @@
   "productName": "TextureHelper",
   "version": "0.1.0-dev",
   "description": "Completely free and open source texture packer.",
-  "main": "./src/browser/main.js",
+  "main": "./dist/browser/main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron .",
     "build": "./node_modules/.bin/gulp"
@@ -16,7 +16,11 @@
     "url": "https://github.com/nuevogaming/texture-helper/issues"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "angular2": "^2.0.0-alpha.45",
+    "crypto-browserify": "^3.11.0",
+    "reflect-metadata": "^0.1.2"
+  },
   "devDependencies": {
     "del": "^2.0.2",
     "electron-prebuilt": "^0.34.3",

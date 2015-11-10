@@ -9,10 +9,9 @@ node_modules/
 # TypeScript defenitions
 typings/
 
-# Compiled TypeScript sources
-src/**/*.js
-src/**/*.js.map
+# Compiled sources
 built/
+dist/
 
 # JetBrains IDE
 .idea

@@ -1,5 +1,4 @@
 /// <reference path="../../typings/tsd.d.ts" />
-/// <reference path="helper-application.ts" />
 
 // save start time
 var shellStartTime = Date.now();
@@ -14,8 +13,10 @@ crashReporter.start();
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 
-    var builderApplication = require('./helper-application');
-    builderApplication.open();
+    let HelperApplication = require('./helper-application');
 
-    console.log("App load time: #{Date.now() - shellStartTime}ms");
+    let helperApplication = new HelperApplication();
+    helperApplication.open();
+
+    console.log('App load time: ' + (Date.now() - shellStartTime) + 'ms');
 });

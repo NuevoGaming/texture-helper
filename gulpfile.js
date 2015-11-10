@@ -3,17 +3,25 @@ var gulp = require('gulp'),
     del = require('del');
 
 var paths = {
-    browserScripts: ['src/browser/*.ts']
+    scripts: ['src/**/*.ts'],
+    target: 'dist'
 };
 
-gulp.task('browser.clean', function() {
-    return del(['src/**/*.js']);
+gulp.task('clean', function(next) {
+    del([paths.target]).then(function() {
+        next();
+    });
 });
 
-gulp.task('default', ['browser.clean'], function() {
-    return gulp.src(paths.browserScripts)
+gulp.task('build', ['clean'], function() {
+    return gulp.src(paths.scripts)
         .pipe(ts({
-            noImplicitAny: true
+            noImplicitAny: true,
+            removeComments: true,
+            target: 'ES5'
         }))
-        .pipe(gulp.dest('src/browser'));
+        .pipe(gulp.dest(paths.target));
+});
+
+gulp.task('default', ['build'], function() {
 });
