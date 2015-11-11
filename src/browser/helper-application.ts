@@ -40,10 +40,10 @@ class HelperApplication {
 
         this.addWindow(window);
     }
-    addWindow(window) {
+    addWindow(window: IBrowserWindow) {
         this._windows.push(window);
     }
-    removeWindow(window) {
+    removeWindow(window: IBrowserWindow) {
         if (this._windows.length == 1) {
             // On OS X it is common for applications and their menu bar
             // to stay active until the user quits explicitly with Cmd + Q

@@ -18,7 +18,8 @@ gulp.task('build', ['clean'], function() {
         .pipe(ts({
             noImplicitAny: true,
             removeComments: true,
-            target: 'ES5'
+            target: 'ES5',
+            experimentalDecorators: true
         }))
         .pipe(gulp.dest(paths.target));
 });
