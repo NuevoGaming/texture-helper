@@ -5,7 +5,7 @@ import { Router } from 'angular2/router';
     selector: 'home'
 })
 @View({
-    template: '<div>Home</div>'
+    template: '<p>This is home page content</p>'
 })
 export class Home {
     router: Router;

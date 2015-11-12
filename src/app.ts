@@ -11,7 +11,7 @@ import { Home } from './home';
     directives: [ RouterLink, RouterOutlet ]
 })
 @RouteConfig([
-    { path: '', as: 'home', component: Home },
+    { path: '/', component: Home, as: 'Home' }
 ])
 export class App {
     name: string;
