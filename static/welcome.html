@@ -3,38 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to TextureHelper</title>
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles/welcome.css">
 </head>
 <body>
-<section id="project-selection" class="welcome-section noselect">
-	<aside class="sidebar-left sidebar-projects">
-		<ul>
-			<li>Existing project*</li>
-		</ul>
-	</aside>
-	<div class="welcome-main">
-		<div class="welcome-main__title">
-			<div class="text-center">
-				<h2>TextureHelper</h2>
-				<span class="version">Version 0.0.1</span>
-			</div>
-			<ul class="welcome-menu center-block">
-				<li class="welcome-menu__item welcome-menu__new-project"><a href="#"><i class="icon-plus"></i> Create New Project</a></li>
-				<li class="welcome-menu__item welcome-menu__open-project"><a href="#"><i class="icon-folder-open-empty"></i> Open</a></li>
-			</ul>
-		</div>
-	</div>
-</section>
-<section id="project-type-selection" class="welcome-section noselect welcome-section-current">
-	<aside class="sidebar-left sidebar-frameworks expanded">
-		<ul>
-			<li>Cocos2d</li>
-		</ul>
-	</aside>
-	<div class="welcome-main">
-		<div><p>New project</p></div>
-		<div><label>Location:</label><input type="text"></div>
-	</div>
-</section>
+	<app></app>
+	<script>
+		document.write('<base href="file://' + __dirname + '/" />');
+
+		require('reflect-metadata');
+		require('../dist/welcome/bootstrap');
+	</script>
 </body>
 </html>

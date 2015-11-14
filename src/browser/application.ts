@@ -1,7 +1,10 @@
 /// <reference path="../../typings/tsd.d.ts" />
+/// <reference path="../../manual_typings/electron.d.ts" />
 
 import WelcomeWindow = require("./welcome-window");
 import ProjectWindow = require("./project-window");
+import ipc = require('ipc');
+import dialog = require('dialog');
 
 var app = require('app');
 
@@ -12,6 +15,12 @@ class Application {
         this._projectWindows = [];
     }
     public start() {
+        ipc.on('showOpenProjectDialog', function() {
+          dialog.showOpenDialog({
+            properties: ['openFile']
+          });
+        });
+
         var welcomeWindow = new WelcomeWindow(),
             self = this;
 
