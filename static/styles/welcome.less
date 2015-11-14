@@ -1,4 +1,5 @@
 @import "fontello.less";
+@import "animations.less";
 @import "common.less";
 
 /** WELCOME LAYOUT **/
@@ -11,13 +12,8 @@
   background-color: #fff;
 
   &.expanded {
-    width: 300px;
     display: block;
     border-right: 1px solid #ececec;
-
-    +.welcome-main {
-      margin-left: 300px;
-    }
   }
 
   ul {
@@ -27,13 +23,57 @@
   }
 }
 
+.sidebar-projects {
+  &.expanded {
+    width: 300px;
+  }
+
+  +.welcome-main {
+    margin-left: 300px;
+  }
+}
+
+.sidebar-frameworks {
+  &.expanded {
+    width: 200px;
+  }
+
+  +.welcome-main {
+    margin-left: 200px;
+  }
+}
+
 .welcome-section {
-  cursor: default;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  cursor: default;
+  visibility: hidden;
+  overflow: hidden;
+  backface-visibility: hidden;
+
+  &-current {
+    visibility: visible;
+    z-index: 1;
+  }
 }
 
 .welcome-main {
-  padding-top: 100px;
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  &__title {
+    padding-top: 100px;
+  }
 }
 
 .welcome-menu {

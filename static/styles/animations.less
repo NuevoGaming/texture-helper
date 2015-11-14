@@ -1,0 +1,74 @@
+/* common */
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+/* slideOutLeft */
+
+@keyframes slideOutLeft {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate(-100%, 0);
+  }
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeft;
+}
+
+/* slideOutRight */
+
+@keyframes slideOutRight {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate(100%, 0);
+  }
+}
+
+.slideOutRight {
+  animation-name: slideOutRight;
+}
+
+/* slideInLeft */
+
+@keyframes slideInLeft {
+  from {
+    transform: translate(-100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+/* slideInRight */
+
+@keyframes slideInRight {
+  from {
+    transform: translate(100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+.slideInRight {
+  animation-name: slideInRight;
+}
