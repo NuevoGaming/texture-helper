@@ -13,10 +13,10 @@ crashReporter.start();
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 
-    let HelperApplication = require('./helper-application');
+    let Application = require('./application');
 
-    let helperApplication = new HelperApplication();
-    helperApplication.open();
+    let app = new Application();
+    app.start();
 
     console.log('App load time: ' + (Date.now() - shellStartTime) + 'ms');
 });

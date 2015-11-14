@@ -12,6 +12,7 @@ typings/
 # Compiled sources
 built/
 dist/
+static/styles/*.css
 
 # JetBrains IDE
 .idea

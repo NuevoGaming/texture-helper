@@ -1,0 +1,84 @@
+@import "fontello.less";
+@import "common.less";
+
+/** WELCOME LAYOUT **/
+
+.sidebar-left {
+  float: left;
+  width: 0;
+  display: none;
+  height: 100%;
+  background-color: #fff;
+
+  &.expanded {
+    width: 300px;
+    display: block;
+    border-right: 1px solid #ececec;
+
+    +.welcome-main {
+      margin-left: 300px;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+  }
+}
+
+.welcome-section {
+  cursor: default;
+  height: 100%;
+}
+
+.welcome-main {
+  padding-top: 100px;
+}
+
+.welcome-menu {
+  width: 300px;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 25px;
+
+  &&__item {
+    font-size: 14px;
+  }
+
+  a {
+    display: block;
+    padding: 7px 20px;
+    color: #000;
+    text-decoration: none;
+
+    &:hover {
+      color: #f00000;
+    }
+
+    &.focused {
+      background-color: #dbe5f5;
+    }
+  }
+
+  [class^="icon-"]:before {
+    font-size: 16px;
+  }
+
+  &__new-project {
+    [class^="icon-"]:before {
+      color: #46a546;
+    }
+  }
+
+  &__open-project {
+    [class^="icon-"]:before {
+      color: #f8a326;
+    }
+  }
+}
+
+.version {
+  color: #808080;
+  font-size: 16px;
+}
