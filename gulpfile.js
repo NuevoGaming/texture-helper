@@ -1,15 +1,21 @@
 var gulp = require('gulp'),
     ts = require('gulp-typescript'),
     del = require('del'),
-    less = require('gulp-less');
+    less = require('gulp-less'),
+    jade = require('gulp-jade');
 
 var PATHS = {
     src: {
         ts: 'src/**/*.ts',
-        welcome_less: 'static/styles/welcome.less'
+        welcome_less: 'src/static/styles/welcome.less',
+        jade: 'src/static/**/*.jade',
+        fonts: 'src/static/fonts/*'
     },
     target: {
-        js: 'dist'
+        common: 'dist',
+        css: 'dist/static/styles',
+        html: 'dist/static',
+        fonts: 'dist/static/fonts'
     },
     typings: {
         angular2: 'node_modules/angular2/bundles/typings/angular2/angular2.d.ts',
@@ -18,19 +24,13 @@ var PATHS = {
     }
 };
 
-gulp.task('clean-js', function(next) {
-    del([PATHS.target.js]).then(function() {
+gulp.task('clean', function(next) {
+    del([PATHS.target.common]).then(function() {
         next();
     });
 });
 
-gulp.task('clean-css', function(next) {
-    del(['static/styles/*.css']).then(function() {
-        next();
-    });
-});
-
-gulp.task('build-js', ['clean-js'], function() {
+gulp.task('build-js', function() {
     var tsResult = gulp.src([
         PATHS.src.ts,
         PATHS.typings.angular2,
@@ -45,16 +45,32 @@ gulp.task('build-js', ['clean-js'], function() {
         experimentalDecorators: true
     }));
 
-    return tsResult.js.pipe(gulp.dest(PATHS.target.js));
+    return tsResult.js.pipe(gulp.dest(PATHS.target.common));
 });
 
-gulp.task('build-css', ['clean-css'], function() {
+gulp.task('build-css', function() {
     return gulp.src([
             PATHS.src.welcome_less
         ])
         .pipe(less())
-        .pipe(gulp.dest('static/styles'));
+        .pipe(gulp.dest(PATHS.target.css));
 });
 
-gulp.task('default', ['build-js', 'build-css'], function() {
+gulp.task('build-html', function() {
+    return gulp.src([
+            PATHS.src.jade
+        ])
+        .pipe(jade({
+          pretty: true
+        }))
+        .pipe(gulp.dest(PATHS.target.html));
+});
+
+gulp.task('mv-fonts', function() {
+  return gulp.src(PATHS.src.fonts)
+    .pipe(gulp.dest(PATHS.target.fonts));;
+});
+
+gulp.task('default', ['clean'], function() {
+  gulp.run('build-js', 'build-css', 'build-html', 'mv-fonts');
 });

@@ -1,0 +1,28 @@
+section#project-selection.welcome-section.noselect([class.welcome-section-current]="state === 1")
+  aside.sidebar-left.sidebar-projects
+    ul
+      li Existing project*
+  div.welcome-main
+    div.welcome-main__title
+      div.text-center
+        h2 TextureHelper
+        span.version Version 0.0.1
+      ul.welcome-menu.center-block
+        li.welcome-menu__item.welcome-menu__new-project
+          a((click)="showProjectTypeSelector()")
+            i.icon-plus
+            | Create New Project
+        li.welcome-menu__item.welcome-menu__open-project
+          a((click)="showOpenProjectDialog()")
+            i.icon-folder-open-empty
+            | Open
+section#project-type-selection.welcome-section.noselect([class.welcome-section-current]="state === 2")
+  aside.sidebar-left.sidebar-frameworks.expanded
+    ul
+      li Cocos2d
+  div.welcome-main
+    div
+      p New project
+    div
+      label Location:
+      input(type="text")

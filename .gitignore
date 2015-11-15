@@ -12,7 +12,8 @@ typings/
 # Compiled sources
 built/
 dist/
-static/styles/*.css
+src/**/*.css
+src/**/*.js
 
 # JetBrains IDE
 .idea
@@ -24,4 +25,3 @@ static/styles/*.css
 # Logs
 npm-debug.log
 debug.log
-

@@ -1,1 +1,1 @@
-# Texture Pack Builder Docs
+# TextureHelper Docs

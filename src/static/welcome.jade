@@ -1,0 +1,15 @@
+doctype html
+html.no-js
+head
+	meta(charset="utf-8")
+	title Welcome to TextureHelper
+	link(rel="stylesheet", href="../../node_modules/bootstrap/dist/css/bootstrap.min.css")
+	link(rel="stylesheet", href="./styles/welcome.css")
+
+body
+	app
+	script.
+		document.write('<base href="file://' + __dirname + '/" />');
+
+		require('reflect-metadata');
+		require('../welcome/bootstrap');
