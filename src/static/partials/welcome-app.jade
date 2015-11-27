@@ -1,4 +1,4 @@
-section#project-selection.welcome-section.noselect([class.welcome-section-current]="state === 1")
+section#project-selection.welcome-section.noselect([ng-class]="{'welcome-section-current': state === 1 || state == 2, 'animated': state === 2 || state == 4, 'slideOutLeft':state === 2, 'slideInLeft': state === 4}")
   aside.sidebar-left.sidebar-projects
     ul
       li Existing project*
@@ -13,10 +13,10 @@ section#project-selection.welcome-section.noselect([class.welcome-section-curren
             i.icon-plus
             | Create New Project
         li.welcome-menu__item.welcome-menu__open-project
-          a((click)="showOpenProjectDialog()")
+          a((click)="openProject()")
             i.icon-folder-open-empty
             | Open
-section#project-type-selection.welcome-section.noselect([class.welcome-section-current]="state === 2")
+section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-section-current': state === 3 || state === 4, 'animated': state === 2 || state === 4, 'slideInRight': state === 2, 'slideOutRight': state === 4}")
   aside.sidebar-left.sidebar-frameworks.expanded
     ul
       li Cocos2d
@@ -24,5 +24,10 @@ section#project-type-selection.welcome-section.noselect([class.welcome-section-c
     div
       p New project
     div
+      label Project name:
+      input(type="text")
+    div
       label Location:
       input(type="text")
+    div
+      a((click)="back()") Back

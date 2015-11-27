@@ -1,6 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
+/// <reference path="../../manual_typings/electron.d.ts" />
 
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+import BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 class ProjectWindow {
     private _closeCallback: () => void;

@@ -1,12 +1,16 @@
 /// <reference path="../../manual_typings/electron.d.ts"/>
 
-import { Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/angular2';
+import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/angular2';
 import ipc = require('ipc');
 
 enum WindowState {
   NewProject = 1,
-  ProjectType = 2
+  ProjectTypeAppearance = 2,
+  ProjectType = 3,
+  NewProjectPageAppearance = 4
 }
+
+const animationTimeout: number = 980;
 
 @Component({
     selector: 'app'
@@ -17,13 +21,26 @@ enum WindowState {
 })
 export class App {
     state: WindowState;
-    constructor() {
+    zone: NgZone;
+    constructor(zone: NgZone) {
       this.state = WindowState.NewProject;
+      this.zone = zone;
     }
-    showOpenProjectDialog() {
-      ipc.send('showOpenProjectDialog');
+    openProject() {
+      ipc.send('application:open-project');
     }
     showProjectTypeSelector() {
-      this.state = WindowState.ProjectType;
+      var self = this;
+      this.state = WindowState.ProjectTypeAppearance;
+      setTimeout(() => self.zone.run(() => {
+        self.state = WindowState.ProjectType;
+      }), animationTimeout);
+    }
+    back() {
+      var self = this;
+      this.state = WindowState.NewProjectPageAppearance;
+      setTimeout(() => self.zone.run(() => {
+        self.state = WindowState.NewProject;
+      }), animationTimeout);
     }
 }
