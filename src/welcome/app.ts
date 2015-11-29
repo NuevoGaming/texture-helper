@@ -27,17 +27,18 @@ class FrameworkViewModel {
 })
 export class App {
     state: WindowState;
-    zone: NgZone;
+    selectedFramework: FrameworkViewModel;
     public name: string;
     public location: string;
     public frameworks: FrameworkViewModel[];
-    constructor(zone: NgZone) {
+    constructor(public zone: NgZone) {
       this.state = WindowState.NewProject;
-      this.zone = zone;
-
       this.frameworks = [];
+
+      this.handleEvents();
+      this.getDefaultLocation();
       this.loadFrameworks();
-      this.frameworks[0].selected = true;
+      this.selectFramework(this.frameworks[0]);
     }
     openProject() {
       ipc.send('application:open-project');
@@ -60,7 +61,27 @@ export class App {
       console.log('create');
     }
     selectFramework(framework: FrameworkViewModel): void {
-      console.log('select ' + framework.code);
+      if (this.selectedFramework !== framework) {
+        if (this.selectedFramework) {
+          this.selectedFramework.selected = false;
+        }
+        this.selectedFramework = framework;
+        this.selectedFramework.selected = true;
+      }
+    }
+    selectLocation(): void {
+      ipc.send('application:select-location', this.location);
+    }
+    private handleEvents(): void {
+      var self = this;
+      ipc.on('browser:location-selected', function(location) {
+        self.zone.run(() => {
+          self.location = location;
+        });
+      })
+    }
+    private getDefaultLocation(): void {
+      this.location = ipc.sendSync('application:get-default-location');
     }
     private loadFrameworks(): void {
       this.frameworks.push(new FrameworkViewModel('Cocos2d', 'cocos2d'));

@@ -1,11 +1,12 @@
 /// <reference path="../../typings/tsd.d.ts" />
+/// <reference path="../../manual_typings/electron.d.ts"/>
 
 import WelcomeWindow = require("./welcome-window");
 import ProjectWindow = require("./project-window");
 import ipc = require('ipc');
 import dialog = require('dialog');
 
-var app = require('app');
+import app = require('app');
 
 class Application {
     private _welcomeWindow: WelcomeWindow;
@@ -48,11 +49,32 @@ class Application {
         self.openProject();
       });
 
+      ipc.on('application:get-default-location', function(event) {
+        event.returnValue = app.getPath('home'); // todo: get last saved location
+      });
 
+      ipc.on('application:select-location', function(event) {
+        self.selectLocation(function(path) {
+          if (path) {
+            event.sender.send('browser:location-selected', path);
+          }
+        });
+      })
     }
     private openProject() {
       dialog.showOpenDialog({
         properties: ['openFile']
+      });
+    }
+    private selectLocation(callback: (path:string) => void) {
+      dialog.showOpenDialog({
+        properties: ['openDirectory']
+      }, function(filenames: string[]) {
+        if (filenames && filenames.length > 0) {
+          callback(filenames[0]);
+        } else {
+          callback(null);
+        }
       });
     }
 }

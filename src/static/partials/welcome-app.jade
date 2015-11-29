@@ -35,6 +35,9 @@ section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-se
         div.form-group
           label.col-sm-2.control-label(for="projectLocation") Location:
           div.col-sm-8
-            input#projectLocation.form-control.input-sm(type="text", [ng-model]="location")
+            div.input-group
+              input#projectLocation.form-control.input-sm(type="text", [ng-model]="location")
+              span.input-group-btn
+                button.btn.btn-default.btn-sm((click)="selectLocation()") ...
     div.welcome-main__buttons
       button.btn.btn-sm.btn-default((click)="createNewProject()") Create

@@ -1,9 +1,19 @@
 // Type definitions for electron
 
 declare namespace Electron {
+    export interface IpcEvent {
+      returnValue: any;
+      sender: IpcSender;
+    }
+
     export interface IIpc {
-      on(channel: string, callback: () => void): void;
-      send(channe: string, ...args: any[]): void;
+      on(channel: string, callback: (...args: any[]) => void): void;
+      send(channel: string, ...args: any[]): void;
+      sendSync(channel: string, ...args: any[]): any;
+    }
+
+    export interface IpcSender {
+      send(channel: string, ...args: any[]): void;
     }
 
     export interface IDialog {
@@ -22,12 +32,6 @@ declare namespace Electron {
       properties?: string[]
     }
 
-    export interface IElectronModule {
-        ipcRenderer: IIpc;
-        ipcMain: IIpc;
-        dialog: IDialog;
-    }
-
     export interface IWebContents {
         openDevTools(): void;
     }
@@ -40,9 +44,14 @@ declare namespace Electron {
 
     export interface IBrowserWindow {
       new(opts: BrowserWindowOptions): IBrowserWindow;
-      loadUrl(url: string) : void;
+      loadUrl(url: string): void;
       webContents: IWebContents;
       on(eventName: string, handler: () => void): void;
+    }
+
+    export interface IApp {
+      quit(): void;
+      getPath(name: string): string;
     }
 }
 
@@ -58,5 +67,10 @@ declare module "dialog" {
 
 declare module "browser-window" {
   const module: Electron.IBrowserWindow;
+  export = module;
+}
+
+declare module "app" {
+  const module: Electron.IApp;
   export = module;
 }
