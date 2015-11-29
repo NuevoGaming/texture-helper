@@ -12,6 +12,12 @@ enum WindowState {
 
 const animationTimeout: number = 980;
 
+class FrameworkViewModel {
+  public selected: boolean;
+  constructor(public name: string, public code: string) {
+  }
+}
+
 @Component({
     selector: 'app'
 })
@@ -24,9 +30,14 @@ export class App {
     zone: NgZone;
     public name: string;
     public location: string;
+    public frameworks: FrameworkViewModel[];
     constructor(zone: NgZone) {
       this.state = WindowState.NewProject;
       this.zone = zone;
+
+      this.frameworks = [];
+      this.loadFrameworks();
+      this.frameworks[0].selected = true;
     }
     openProject() {
       ipc.send('application:open-project');
@@ -45,7 +56,13 @@ export class App {
         self.state = WindowState.NewProject;
       }), animationTimeout);
     }
-    createNewProject() {
+    createNewProject(): void {
       console.log('create');
+    }
+    selectFramework(framework: FrameworkViewModel): void {
+      console.log('select ' + framework.code);
+    }
+    private loadFrameworks(): void {
+      this.frameworks.push(new FrameworkViewModel('Cocos2d', 'cocos2d'));
     }
 }

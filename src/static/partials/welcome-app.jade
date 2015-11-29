@@ -19,8 +19,10 @@ section#project-selection.welcome-section.noselect([ng-class]="{'welcome-section
 section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-section-current': state === 3 || state === 4, 'animated': state === 2 || state === 4, 'slideInRight': state === 2, 'slideOutRight': state === 4}")
   aside.sidebar-left.sidebar-frameworks.expanded
     ul
-      li Cocos2d
-    div
+      li.sidebar-frameworks__item(*ng-for="#framework of frameworks", [ng-class]="{'selected': framework.selected}", (click)="selectFramework(framework)")
+        i.sidebar-frameworks__item-icon([ng-style]="{'background': 'url(./images/frameworks/' + framework.code + '.png)'}")
+        span {{framework.name}}
+    div.previous-section-btn.btn.btn-default
       i.icon-plus((click)="back()")
   div.welcome-main
     div.container-fluid

@@ -49,6 +49,25 @@ app {
       margin-left: 200px;
     }
   }
+
+  &__item {
+    padding: 6px 8px;
+
+    &.selected {
+      background-color: #f07746;
+    }
+    
+    &-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 32px;
+      height: 32px;
+    }
+
+    > span {
+      margin-left: 6px;
+    }
+  }
 }
 
 .welcome-section {
@@ -144,6 +163,18 @@ app {
       color: #f8a326;
     }
   }
+}
+
+.previous-section-btn {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-left: 12px;
+  margin-bottom: 12px;
+  padding: 2px;
+  opacity: 0.8;
 }
 
 .version {
