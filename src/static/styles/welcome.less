@@ -5,8 +5,15 @@
 
 /** WELCOME LAYOUT **/
 
+app {
+  display: block;
+  height: 100%;
+}
+
 .sidebar-left {
-  float: left;
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 0;
   display: none;
   height: 100%;
@@ -74,6 +81,26 @@
 
   &__title {
     padding-top: 100px;
+  }
+
+  &__head {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding-left: 7px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  &__buttons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 12px;
+  }
+
+  .control-label {
+    padding-left: 7px;
+    padding-right: 7px;
   }
 }
 

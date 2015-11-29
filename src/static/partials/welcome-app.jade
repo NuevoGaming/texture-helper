@@ -20,14 +20,19 @@ section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-se
   aside.sidebar-left.sidebar-frameworks.expanded
     ul
       li Cocos2d
+    div
+      i.icon-plus((click)="back()")
   div.welcome-main
-    div
-      p New project
-    div
-      label Project name:
-      input(type="text")
-    div
-      label Location:
-      input(type="text")
-    div
-      a((click)="back()") Back
+    div.container-fluid
+      div.row.welcome-main__head New project
+      form.form-horizontal
+        div.form-group
+          label.col-sm-2.control-label(for="projectName") Project name:
+          div.col-sm-8
+            input#projectName.form-control.input-sm(type="text", [ng-model]="name")
+        div.form-group
+          label.col-sm-2.control-label(for="projectLocation") Location:
+          div.col-sm-8
+            input#projectLocation.form-control.input-sm(type="text", [ng-model]="location")
+    div.welcome-main__buttons
+      button.btn.btn-sm.btn-default((click)="createNewProject()") Create

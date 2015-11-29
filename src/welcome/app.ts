@@ -22,6 +22,8 @@ const animationTimeout: number = 980;
 export class App {
     state: WindowState;
     zone: NgZone;
+    public name: string;
+    public location: string;
     constructor(zone: NgZone) {
       this.state = WindowState.NewProject;
       this.zone = zone;
@@ -42,5 +44,8 @@ export class App {
       setTimeout(() => self.zone.run(() => {
         self.state = WindowState.NewProject;
       }), animationTimeout);
+    }
+    createNewProject() {
+      console.log('create');
     }
 }
