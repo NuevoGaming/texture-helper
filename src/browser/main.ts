@@ -1,4 +1,4 @@
-/// <reference path="../../typings/tsd.d.ts" />
+/// <reference path="../../typings/node/node.d.ts" />
 
 // save start time
 var shellStartTime = Date.now();

@@ -1,12 +1,13 @@
-/// <reference path="../../typings/tsd.d.ts" />
-/// <reference path="../../manual_typings/electron.d.ts"/>
+/// <reference path="../../typings/node/node.d.ts" />
+/// <reference path="../../manual-typings/electron-main.d.ts" />
 
-import WelcomeWindow = require("./welcome-window");
-import ProjectWindow = require("./project-window");
+import app = require('app');
 import ipc = require('ipc');
 import dialog = require('dialog');
 
-import app = require('app');
+import WelcomeWindow = require("./welcome-window");
+import ProjectWindow = require("./project-window");
+import ProjectMeta from '../contracts/ProjectMeta';
 
 class Application {
     private _welcomeWindow: WelcomeWindow;
@@ -21,16 +22,21 @@ class Application {
 
         welcomeWindow.beforeClose(function() {
             self._welcomeWindow = null;
-            // On OS X it is common for applications and their menu bar
-            // to stay active until the user quits explicitly with Cmd + Q
-            if (process.platform in ['win32', 'linux']) {
-                app.quit();
-                return;
+            if (self._projectWindows.length == 0) {
+              self.close();
             }
         });
 
         this._welcomeWindow = welcomeWindow;
         this._welcomeWindow.open();
+    }
+    private close() {
+      // On OS X it is common for applications and their menu bar
+      // to stay active until the user quits explicitly with Cmd + Q
+      if (process.platform in ['win32', 'linux']) {
+          app.quit();
+          return;
+      }
     }
     private addProjectWindow(window: ProjectWindow) {
         this._projectWindows.push(window);
@@ -49,22 +55,41 @@ class Application {
         self.openProject();
       });
 
-      ipc.on('application:get-default-location', function(event) {
+      ipc.on('application:get-default-location', function(event: any) {
         event.returnValue = app.getPath('home'); // todo: get last saved location
       });
 
-      ipc.on('application:select-location', function(event) {
+      ipc.on('application:select-location', function(event: any) {
         self.selectLocation(function(path) {
           if (path) {
             event.sender.send('browser:location-selected', path);
           }
         });
       })
+
+      ipc.on('application:create-project', function(event: any, meta: ProjectMeta) {
+        self.createProject(meta);
+      });
     }
     private openProject() {
       dialog.showOpenDialog({
         properties: ['openFile']
       });
+    }
+    private createProject(meta: ProjectMeta) {
+      var self = this,
+          projectWindow = new ProjectWindow();
+      projectWindow.beforeClose(function() {
+        var index = self._projectWindows.indexOf(this);
+        if (index > -1) {
+          self._projectWindows.splice(index, 1);
+        }
+      });
+      this._projectWindows.push(projectWindow);
+      if (this._welcomeWindow) {
+        this._welcomeWindow.close();
+      }
+      projectWindow.open();
     }
     private selectLocation(callback: (path:string) => void) {
       dialog.showOpenDialog({

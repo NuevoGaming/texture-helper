@@ -1,10 +1,10 @@
-/// <reference path="../../typings/tsd.d.ts" />
-/// <reference path="../../manual_typings/electron.d.ts" />
+/// <reference path="../../manual-typings/electron-main.d.ts" />
 
 import BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 class WelcomeWindow {
     private _closeCallback: () => void;
+    private _window: Electron.BrowserWindow;
     constructor() {
     }
     public open() {
@@ -25,6 +25,11 @@ class WelcomeWindow {
         window.on('closed', function() {
             self.handleClose();
         });
+
+        this._window = window;
+    }
+    public close() {
+      this._window.close();
     }
     public beforeClose(handler: () => void) {
         this._closeCallback = handler;

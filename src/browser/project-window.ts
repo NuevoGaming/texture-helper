@@ -1,5 +1,4 @@
-/// <reference path="../../typings/tsd.d.ts" />
-/// <reference path="../../manual_typings/electron.d.ts" />
+/// <reference path="../../manual-typings/electron-main.d.ts" />
 
 import BrowserWindow = require('browser-window');  // Module to create native browser window.
 

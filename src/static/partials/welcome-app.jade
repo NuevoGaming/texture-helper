@@ -31,12 +31,12 @@ section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-se
         div.form-group
           label.col-sm-2.control-label(for="projectName") Project name:
           div.col-sm-8
-            input#projectName.form-control.input-sm(type="text", [ng-model]="name")
+            input#projectName.form-control.input-sm(type="text", [(ng-model)]="newProject.name")
         div.form-group
           label.col-sm-2.control-label(for="projectLocation") Location:
           div.col-sm-8
             div.input-group
-              input#projectLocation.form-control.input-sm(type="text", [ng-model]="location")
+              input#projectLocation.form-control.input-sm(type="text", [(ng-model)]="newProject.location")
               span.input-group-btn
                 button.btn.btn-default.btn-sm((click)="selectLocation()") ...
     div.welcome-main__buttons

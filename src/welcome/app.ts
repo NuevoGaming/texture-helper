@@ -1,6 +1,9 @@
-/// <reference path="../../manual_typings/electron.d.ts"/>
+/// <reference path="../../manual-typings/electron-renderer.d.ts"/>
 
 import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/angular2';
+
+import ProjectMeta from '../contracts/ProjectMeta';
+
 import ipc = require('ipc');
 
 enum WindowState {
@@ -18,6 +21,11 @@ class FrameworkViewModel {
   }
 }
 
+class NewProjectViewModel {
+  public name: string;
+  public location: string;
+}
+
 @Component({
     selector: 'app'
 })
@@ -28,12 +36,12 @@ class FrameworkViewModel {
 export class App {
     state: WindowState;
     selectedFramework: FrameworkViewModel;
-    public name: string;
-    public location: string;
-    public frameworks: FrameworkViewModel[];
+    newProject: NewProjectViewModel;
+    frameworks: FrameworkViewModel[];
     constructor(public zone: NgZone) {
       this.state = WindowState.NewProject;
       this.frameworks = [];
+      this.newProject = new NewProjectViewModel();
 
       this.handleEvents();
       this.getDefaultLocation();
@@ -58,7 +66,11 @@ export class App {
       }), animationTimeout);
     }
     createNewProject(): void {
-      console.log('create');
+      var meta = new ProjectMeta();
+      meta.Name = this.newProject.name;
+      meta.FrameworkCode = this.selectedFramework.code;
+      meta.Location = this.newProject.location;
+      ipc.send('application:create-project', meta);
     }
     selectFramework(framework: FrameworkViewModel): void {
       if (this.selectedFramework !== framework) {
@@ -70,18 +82,18 @@ export class App {
       }
     }
     selectLocation(): void {
-      ipc.send('application:select-location', this.location);
+      ipc.send('application:select-location', this.newProject.location);
     }
     private handleEvents(): void {
       var self = this;
-      ipc.on('browser:location-selected', function(location) {
+      ipc.on('browser:location-selected', function(location: string) {
         self.zone.run(() => {
-          self.location = location;
+          self.newProject.location = location;
         });
-      })
+      });
     }
     private getDefaultLocation(): void {
-      this.location = ipc.sendSync('application:get-default-location');
+      this.newProject.location = ipc.sendSync('application:get-default-location');
     }
     private loadFrameworks(): void {
       this.frameworks.push(new FrameworkViewModel('Cocos2d', 'cocos2d'));
