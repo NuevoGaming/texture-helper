@@ -16,7 +16,7 @@ class WelcomeWindow {
         }), self = this;
 
         // and load the index.html of the app.
-        window.loadUrl('file://' + __dirname + '/../static/welcome.html');
+        window.loadURL('file://' + __dirname + '/../static/welcome.html');
 
         // Open the DevTools.
         window.webContents.openDevTools();

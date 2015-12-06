@@ -54,6 +54,10 @@ declare namespace Electron {
       quit(): void;
       getPath(name: string): string;
     }
+
+    export interface ElectronModule {
+      ipcMain: IPCSender;
+    }
 }
 
 declare module "ipc" {
@@ -73,5 +77,10 @@ declare module "browser-window" {
 
 declare module "app" {
   const module: Electron.App;
+  export = module;
+}
+
+declare module "electron" {
+  const module: Electron.ElectronModule;
   export = module;
 }

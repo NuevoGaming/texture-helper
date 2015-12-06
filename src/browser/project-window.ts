@@ -12,7 +12,7 @@ class ProjectWindow {
             self = this;
 
         // and load the index.html of the app.
-        window.loadUrl('file://' + __dirname + '/../static/project.html');
+        window.loadURL('file://' + __dirname + '/../static/project.html');
 
         // Open the DevTools.
         window.webContents.openDevTools();

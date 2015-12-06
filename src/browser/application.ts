@@ -2,12 +2,14 @@
 /// <reference path="../../manual-typings/electron-main.d.ts" />
 
 import app = require('app');
-import ipc = require('ipc');
+import electron = require('electron');
 import dialog = require('dialog');
 
 import WelcomeWindow = require("./welcome-window");
 import ProjectWindow = require("./project-window");
 import ProjectMeta from '../contracts/ProjectMeta';
+
+var ipc = electron.ipcMain;
 
 class Application {
     private _welcomeWindow: WelcomeWindow;

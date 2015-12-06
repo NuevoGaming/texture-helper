@@ -4,7 +4,8 @@ import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angul
 
 import ProjectMeta from '../contracts/ProjectMeta';
 
-import ipc = require('ipc');
+import electron = require('electron');
+var ipc = electron.ipcRenderer;
 
 enum WindowState {
   NewProject = 1,

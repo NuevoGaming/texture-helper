@@ -6,9 +6,13 @@ declare namespace Electron {
     send(channel: string, ...args: any[]): void;
     sendSync(channel: string, ...args: any[]): any;
   }
+
+  export interface ElectronModule {
+    ipcRenderer: IPC;
+  }
 }
 
-declare module "ipc" {
-  const module: Electron.IPC;
+declare module "electron" {
+  const module: Electron.ElectronModule;
   export = module;
 }
