@@ -1,21 +1,20 @@
 /// <reference path="../../manual-typings/electron-main.d.ts" />
 
-import BrowserWindow = require('browser-window');  // Module to create native browser window.
+import BrowserWindow = require('browser-window');
 
 class ProjectWindow {
     private _closeCallback: () => void;
     constructor() {
     }
     public open() {
-        // Create the browser window.
-        var window = new BrowserWindow({width: 800, height: 600}),
+        var window = new BrowserWindow({ show: false }),
             self = this;
 
-        // and load the index.html of the app.
+        window.maximize();
         window.loadURL('file://' + __dirname + '/../static/project.html');
-
-        // Open the DevTools.
         window.webContents.openDevTools();
+
+        window.show();
 
         // Emitted when the window is closed.
         window.on('closed', function() {
