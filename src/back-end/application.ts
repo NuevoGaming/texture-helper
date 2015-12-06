@@ -8,6 +8,7 @@ import dialog = require('dialog');
 import WelcomeWindow = require("./welcome-window");
 import ProjectWindow = require("./project-window");
 import ProjectMeta from '../contracts/ProjectMeta';
+import { Project } from './models/project';
 
 var ipc = electron.ipcMain;
 
@@ -79,8 +80,10 @@ class Application {
       });
     }
     private createProject(meta: ProjectMeta) {
-      var self = this,
-          projectWindow = new ProjectWindow();
+      var self = this;
+
+      var project = new Project(meta);
+      var projectWindow = new ProjectWindow(project);
       projectWindow.beforeClose(function() {
         var index = self._projectWindows.indexOf(this);
         if (index > -1) {

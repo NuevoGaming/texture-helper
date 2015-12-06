@@ -1,15 +1,21 @@
-import { Component, View } from 'angular2/angular2';
-import { Router } from 'angular2/router';
+/// <reference path="../../../manual-typings/electron-renderer.d.ts"/>
+
+import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES  } from 'angular2/angular2';
 
 @Component({
-    selector: 'home'
+  selector: 'app'
 })
 @View({
-    template: '<p>This is home page content</p>'
+  templateUrl: '../public/partials/project-app.html',
+  directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 export class ProjectHomeController {
-    router: Router;
-    constructor(router: Router) {
-        this.router = router;
-    }
+  public name: string;
+  constructor(public zone: NgZone) {
+    this.name = 'World';
+
+    this.handleEvents();
+  }
+  private handleEvents(): void {
+  }
 }

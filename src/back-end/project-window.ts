@@ -1,15 +1,19 @@
 /// <reference path="../../manual-typings/electron-main.d.ts" />
+/// <reference path="./models/project.ts" />
 
 import BrowserWindow = require('browser-window');
 
 class ProjectWindow {
+    private _project: Project;
     private _closeCallback: () => void;
-    constructor() {
+    constructor(project:Project) {
+      this._project = project;
     }
     public open() {
         var window = new BrowserWindow({
-          width: 800,
-          height: 600
+          width: 1024,
+          height: 600,
+          title: this._project.Name + ' - TextureHelper'
         }), self = this;
 
         //window.maximize();
