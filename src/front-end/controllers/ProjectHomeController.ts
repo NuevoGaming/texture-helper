@@ -7,7 +7,7 @@ import { Router } from 'angular2/router';
 @View({
     template: '<p>This is home page content</p>'
 })
-export class Home {
+export class ProjectHomeController {
     router: Router;
     constructor(router: Router) {
         this.router = router;

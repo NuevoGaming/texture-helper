@@ -11,7 +11,7 @@ class ProjectWindow {
             self = this;
 
         window.maximize();
-        window.loadURL('file://' + __dirname + '/../static/project.html');
+        window.loadURL('file://' + __dirname + '/../front-end/public/views/project.html');
         window.webContents.openDevTools();
 
         window.show();

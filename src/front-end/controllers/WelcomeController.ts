@@ -1,8 +1,8 @@
-/// <reference path="../../manual-typings/electron-renderer.d.ts"/>
+/// <reference path="../../../manual-typings/electron-renderer.d.ts"/>
 
 import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/angular2';
 
-import ProjectMeta from '../contracts/ProjectMeta';
+import ProjectMeta from '../../contracts/ProjectMeta';
 
 import electron = require('electron');
 var ipc = electron.ipcRenderer;
@@ -31,10 +31,10 @@ class NewProjectViewModel {
     selector: 'app'
 })
 @View({
-    templateUrl: '../static/partials/welcome-app.html',
+    templateUrl: '../public/partials/welcome-app.html',
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
-export class App {
+export class WelcomeController {
     state: WindowState;
     selectedFramework: FrameworkViewModel;
     newProject: NewProjectViewModel;

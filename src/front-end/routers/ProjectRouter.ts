@@ -1,19 +1,19 @@
 import { Component, View } from 'angular2/angular2';
 import { RouteConfig, Router, RouterLink, RouterOutlet } from 'angular2/router';
 
-import { Home } from './home';
+import { ProjectHomeController } from '../controllers/ProjectHomeController';
 
 @Component({
     selector: 'app'
 })
 @View({
-    templateUrl: '../static/partials/app.html',
+    templateUrl: '../public/partials/project-app.html',
     directives: [ RouterLink, RouterOutlet ]
 })
 @RouteConfig([
-    { path: '/', component: Home, as: 'Home' }
+    { path: '/', component: ProjectHomeController, as: 'Home' }
 ])
-export class App {
+export class ProjectRouter {
     name: string;
     constructor() {
         this.name = 'World';
