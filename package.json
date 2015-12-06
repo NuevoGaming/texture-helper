@@ -3,7 +3,7 @@
   "productName": "TextureHelper",
   "version": "0.1.0-dev",
   "description": "Completely free and open source texture packer.",
-  "main": "./dist/browser/main.js",
+  "main": "./dist/back-end/main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron .",
     "build": "./node_modules/.bin/gulp"

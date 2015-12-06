@@ -3,12 +3,10 @@ html
 	head
 		meta(charset="UTF-8")
 		title TextureHelper
+		link(rel="stylesheet", href="../../../../node_modules/bootstrap/dist/css/bootstrap.min.css")
+		link(rel="stylesheet", href="../styles/project.css")
 	body(tabindex="-1")
 		app
-		section.
-			We are using node <script>document.write(process.versions.node)</script>,
-			Chrome <script>document.write(process.versions.chrome)</script>,
-			and Electron <script>document.write(process.versions.electron)</script>.
 		script.
 			document.write('<base href="file://' + __dirname + '/../" />');
 			require('reflect-metadata');

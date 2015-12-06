@@ -7,17 +7,18 @@ var gulp = require('gulp'),
 var PATHS = {
     src: {
         ts: 'src/**/*.ts',
-        welcome_less: 'src/static/styles/welcome.less',
-        jade: 'src/static/**/*.jade',
-        fonts: 'src/static/fonts/**/*',
-        images: 'src/static/images/**/*'
+        welcome_less: 'src/front-end/public/styles/welcome.less',
+        project_less: 'src/front-end/public/styles/project.less',
+        jade: 'src/front-end/public/**/*.jade',
+        fonts: 'src/front-end/public/fonts/**/*',
+        images: 'src/front-end/public/images/**/*'
     },
     target: {
         common: 'dist',
-        css: 'dist/static/styles',
-        html: 'dist/static',
-        fonts: 'dist/static/fonts',
-        images: 'dist/static/images'
+        css: 'dist/front-end/public/styles',
+        html: 'dist/front-end/public',
+        fonts: 'dist/front-end/public/fonts',
+        images: 'dist/front-end/public/images'
     },
     typings: {
         angular2: 'node_modules/angular2/bundles/typings/angular2/angular2.d.ts',
@@ -52,7 +53,8 @@ gulp.task('build-js', function() {
 
 gulp.task('build-css', function() {
     return gulp.src([
-            PATHS.src.welcome_less
+            PATHS.src.welcome_less,
+            PATHS.src.project_less
         ])
         .pipe(less())
         .pipe(gulp.dest(PATHS.target.css));

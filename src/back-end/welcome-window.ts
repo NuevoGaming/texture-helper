@@ -1,6 +1,6 @@
 /// <reference path="../../manual-typings/electron-main.d.ts" />
 
-import BrowserWindow = require('browser-window');  // Module to create native browser window.
+import BrowserWindow = require('browser-window');
 
 class WelcomeWindow {
     private _closeCallback: () => void;
@@ -8,20 +8,15 @@ class WelcomeWindow {
     constructor() {
     }
     public open() {
-        // Create the browser window.
         var window = new BrowserWindow({
             width: 777,
             height: 460,
             resizable: false
         }), self = this;
 
-        // and load the index.html of the app.
         window.loadURL('file://' + __dirname + '/../front-end/public/views/welcome.html');
-
-        // Open the DevTools.
         window.webContents.openDevTools();
 
-        // Emitted when the window is closed.
         window.on('closed', function() {
             self.handleClose();
         });

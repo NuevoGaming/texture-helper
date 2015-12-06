@@ -48,6 +48,8 @@ export class WelcomeController {
       this.getDefaultLocation();
       this.loadFrameworks();
       this.selectFramework(this.frameworks[0]);
+
+      this.logVersions();
     }
     openProject() {
       ipc.send('application:open-project');
@@ -98,5 +100,11 @@ export class WelcomeController {
     }
     private loadFrameworks(): void {
       this.frameworks.push(new FrameworkViewModel('Cocos2d', 'cocos2d'));
+    }
+    private logVersions(): void {
+      var message = 'We are using node ' + process.versions.node +
+        ', Chrome ' + process.versions.chrome +
+        ', and Electron ' + process.versions.electron;
+      console.log(message);
     }
 }

@@ -7,16 +7,16 @@ class ProjectWindow {
     constructor() {
     }
     public open() {
-        var window = new BrowserWindow({ show: false }),
-            self = this;
+        var window = new BrowserWindow({
+          width: 800,
+          height: 600
+        }), self = this;
 
-        window.maximize();
+        //window.maximize();
         window.loadURL('file://' + __dirname + '/../front-end/public/views/project.html');
         window.webContents.openDevTools();
+        //window.show();
 
-        window.show();
-
-        // Emitted when the window is closed.
         window.on('closed', function() {
             self.handleClose();
         });
