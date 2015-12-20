@@ -1,12 +1,13 @@
 /// <reference path="../../../manual-typings/electron-renderer.d.ts"/>
 
-import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES  } from 'angular2/angular2';
+import { Component, View, NgZone } from 'angular2/core';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 
 @Component({
   selector: 'app'
 })
 @View({
-  templateUrl: '../partials/project-app.html',
+  templateUrl: './partials/project-app.html',
   directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 export class ProjectHomeController {
