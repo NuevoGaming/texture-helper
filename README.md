@@ -1,4 +1,4 @@
-TextureHelper is a completely free and open source texture packer. 
+TextureHelper is a completely free and open source texture packer.
 
 ## Contribute
 
@@ -11,30 +11,23 @@ You are free to contribute to TextureHelper.
 ## Building
 
 First of all install npm and Node.js from [nodejs.org](https://nodejs.org).
-Install project dependencies
+
+After that install [gulp](http://gulpjs.com) and [TypeScript definitions manager](http://definitelytyped.org/tsd/)
 
 ```bash
-> npm install
+> npm install -g gulp tsd
 ```
 
-Install [TypeScript type definitions](http://definitelytyped.org):
+Install dependencies and [TypeScript type definitions](http://definitelytyped.org)
 
 ```bash
-> sudo npm install -g tsd
-> tsd install
+> npm install && tsd install
 ```
 
-Install [gulp](http://gulpjs.com) and build source:
+And finally run build and start Electron (aka Atom Shell):
 
 ```bash
-> sudo npm install -g gulp
-> gulp
-```
-
-And finally run Electron (aka Atom Shell):
-
-```bash
-> npm start
+> gulp run
 ```
 
 ## Downloads
@@ -49,5 +42,3 @@ TODO
 ## License
 
 MIT
-
-

@@ -1,4 +1,4 @@
-section#project-selection.welcome-section.noselect([ng-class]="{'welcome-section-current': state === 1 || state == 2, 'animated': state === 2 || state == 4, 'slideOutLeft':state === 2, 'slideInLeft': state === 4}")
+section#project-selection.welcome-section.noselect([ngClass]="{'welcome-section-current': state === 1 || state == 2, 'animated': state === 2 || state == 4, 'slideOutLeft':state === 2, 'slideInLeft': state === 4}")
   aside.sidebar-left.sidebar-projects
     ul
       li Existing project*
@@ -16,11 +16,11 @@ section#project-selection.welcome-section.noselect([ng-class]="{'welcome-section
           a((click)="openProject()")
             i.icon-folder-open-empty
             | Open
-section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-section-current': state === 3 || state === 4, 'animated': state === 2 || state === 4, 'slideInRight': state === 2, 'slideOutRight': state === 4}")
+section#project-type-selection.welcome-section.noselect([ngClass]="{'welcome-section-current': state === 3 || state === 4, 'animated': state === 2 || state === 4, 'slideInRight': state === 2, 'slideOutRight': state === 4}")
   aside.sidebar-left.sidebar-frameworks.expanded
     ul
-      li.sidebar-frameworks__item(*ng-for="#framework of frameworks", [ng-class]="{'selected': framework.selected}", (click)="selectFramework(framework)")
-        i.sidebar-frameworks__item-icon([ng-style]="{'background': 'url(./images/frameworks/' + framework.code + '.png)'}")
+      li.sidebar-frameworks__item(*ngFor="#framework of frameworks", [ngClass]="{'selected': framework.selected}", (click)="selectFramework(framework)")
+        i.sidebar-frameworks__item-icon([ngStyle]="{'background': 'url(./images/frameworks/' + framework.code + '.png)'}")
         span {{framework.name}}
     div.previous-section-btn.btn.btn-default
       i.icon-left-big((click)="back()")
@@ -31,12 +31,12 @@ section#project-type-selection.welcome-section.noselect([ng-class]="{'welcome-se
         div.form-group
           label.col-sm-2.control-label(for="projectName") Project name:
           div.col-sm-8
-            input#projectName.form-control.input-sm(type="text", [(ng-model)]="newProject.name")
+            input#projectName.form-control.input-sm(type="text", [(ngModel)]="newProject.name")
         div.form-group
           label.col-sm-2.control-label(for="projectLocation") Location:
           div.col-sm-8
             div.input-group
-              input#projectLocation.form-control.input-sm(type="text", [(ng-model)]="newProject.location")
+              input#projectLocation.form-control.input-sm(type="text", [(ngModel)]="newProject.location")
               span.input-group-btn
                 button.btn.btn-default.btn-sm((click)="selectLocation()") ...
     div.welcome-main__buttons

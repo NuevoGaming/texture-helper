@@ -4,10 +4,7 @@
   "version": "0.1.0-dev",
   "description": "Completely free and open source texture packer.",
   "main": "./dist/back-end/main.js",
-  "scripts": {
-    "start": "./node_modules/.bin/electron .",
-    "build": "./node_modules/.bin/gulp"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/nuevogaming/texture-helper.git"
@@ -17,10 +14,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "angular2": "^2.0.0-alpha.48",
+    "angular2": "2.0.0-beta.0",
     "bootstrap": "^3.3.6",
-    "crypto-browserify": "^3.11.0",
-    "reflect-metadata": "^0.1.2"
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "5.0.0-beta.0",
+    "zone.js": "0.5.10"
   },
   "devDependencies": {
     "del": "^2.1.0",
@@ -28,7 +28,8 @@
     "gulp": "^3.9.0",
     "gulp-jade": "^1.1.0",
     "gulp-less": "^3.0.5",
+    "gulp-run": "^1.6.12",
     "gulp-typescript": "^2.10.0",
-    "live-server": "^0.8.2"
+    "run-sequence": "^1.1.5"
   }
 }

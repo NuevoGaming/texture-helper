@@ -6,7 +6,7 @@ import { Component, View, NgZone, CORE_DIRECTIVES, FORM_DIRECTIVES  } from 'angu
   selector: 'app'
 })
 @View({
-  templateUrl: '../public/partials/project-app.html',
+  templateUrl: '../partials/project-app.html',
   directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 export class ProjectHomeController {
