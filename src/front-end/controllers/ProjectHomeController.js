@@ -1,5 +1,3 @@
-/// <reference path="../../../manual-typings/electron-renderer.d.ts"/>
-
 import { Component, View, NgZone } from 'angular2/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 
@@ -10,13 +8,15 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
   templateUrl: './partials/project-app.html',
   directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
-export class ProjectHomeController {
-  public name: string;
-  constructor(public zone: NgZone) {
-    this.name = 'World';
+class ProjectHomeController {
+  constructor(zone: NgZone) {
+    this._zone = zone;
+    this._name = 'World';
 
-    this.handleEvents();
+    this._handleEvents();
   }
-  private handleEvents(): void {
+  _handleEvents() {
   }
 }
+
+module.exports = ProjectHomeController;

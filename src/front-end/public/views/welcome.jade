@@ -9,5 +9,8 @@ html
 		app
 
 		script.
-			document.write('<base href="file://' + __dirname + '/../" />');
-			require('../../WelcomeBootstrap.js');
+			var path = require('path');
+			var base = path.normalize(path.join('file://', __dirname, '../'));
+
+			document.write('<base href="' + base + '" />');
+			require('../../welcome-bundle');

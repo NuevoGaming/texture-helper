@@ -1,13 +1,12 @@
-/// <reference path="../../typings/node/node.d.ts" />
-
 // save start time
 var shellStartTime = Date.now();
 
-var app = require('app');  // Module to control application life.
-var crashReporter = require('crash-reporter');
+var electron = require('electron');
+const app = electron.app;
+//const crashReporter: GitHubElectron.CrashReporter = electron.CrashReporter;
 
 // Report crashes to our server.
-crashReporter.start();
+//crashReporter.start();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

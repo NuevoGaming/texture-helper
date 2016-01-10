@@ -1,14 +1,15 @@
-var gulp = require('gulp'),
-  runSequence = require('run-sequence'),
-  ts = require('gulp-typescript'),
-  del = require('del'),
-  less = require('gulp-less'),
-  jade = require('gulp-jade'),
-  run = require('gulp-run');
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
+const del = require('del');
+const less = require('gulp-less');
+const jade = require('gulp-jade');
+const run = require('gulp-run');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+const gutil = require('gulp-util');
 
-var PATHS = {
+const PATHS = {
   src: {
-    ts: 'src/**/*.ts',
     welcome_less: 'src/front-end/public/styles/welcome.less',
     project_less: 'src/front-end/public/styles/project.less',
     jade: 'src/front-end/public/**/*.jade',
@@ -16,39 +17,24 @@ var PATHS = {
     images: 'src/front-end/public/images/**/*'
   },
   target: {
-    common: 'dist',
-    css: 'dist/front-end/public/styles',
-    html: 'dist/front-end/public',
-    fonts: 'dist/front-end/public/fonts',
-    images: 'dist/front-end/public/images'
-  },
-  typings: {
-    angular2: 'node_modules/angular2/angular2.d.ts',
-    router: 'node_modules/angular2/router.d.ts',
-    http: 'node_modules/angular2/http.d.ts'
+    common: 'built',
+    css: 'built/front-end/public/styles',
+    html: 'built/front-end/public',
+    fonts: 'built/front-end/public/fonts',
+    images: 'built/front-end/public/images'
   }
 };
 
 gulp.task('build:clean', function() {
-  return del([PATHS.target.common]);
+  return del(['dist', PATHS.target.common]);
 });
 
-gulp.task('build:js', function() {
-  var tsResult = gulp.src([
-      PATHS.src.ts,
-      PATHS.typings.angular2,
-      PATHS.typings.router,
-      PATHS.typings.http
-    ])
-    .pipe(ts({
-      noImplicitAny: true,
-      module: 'commonjs',
-      target: 'ES5',
-      emitDecoratorMetadata: true,
-      experimentalDecorators: true
-    }));
-
-  return tsResult.js.pipe(gulp.dest(PATHS.target.common));
+gulp.task('build:js', function(callback) {
+    webpack(webpackConfig, function(err, stats) {
+      if(err) throw new gutil.PluginError('webpack', err);
+      gutil.log('[webpack]', stats.toString());
+      callback();
+    });
 });
 
 gulp.task('build:css', function() {

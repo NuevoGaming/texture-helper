@@ -15,7 +15,6 @@ typings/
 built/
 dist/
 src/**/*.css
-src/**/*.js
 
 # JetBrains IDE
 .idea

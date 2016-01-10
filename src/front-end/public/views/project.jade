@@ -9,5 +9,8 @@ html
 		app.clearfix
 
 		script.
-			document.write('<base href="file://' + __dirname + '/../" />');
-			require('../../ProjectBootstrap');
+			var path = require('path');
+			var base = path.normalize(path.join('file://', __dirname, '../'));
+
+			document.write('<base href="' + base + '" />');
+			require('../../project-bundle');

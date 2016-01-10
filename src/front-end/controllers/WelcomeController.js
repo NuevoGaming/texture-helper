@@ -1,55 +1,55 @@
-/// <reference path="../../../manual-typings/electron-renderer.d.ts"/>
-
 import { Component, View, NgZone } from 'angular2/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
 import ProjectMeta from '../../contracts/ProjectMeta';
 
-import electron = require('electron');
-var ipc = electron.ipcRenderer;
+import electron from 'electron';
+const ipc = electron.ipcRenderer;
 
-enum WindowState {
-  NewProject = 1,
-  ProjectTypeAppearance = 2,
-  ProjectType = 3,
-  NewProjectPageAppearance = 4
+const WindowState = {
+  NewProject: 1,
+  ProjectTypeAppearance: 2,
+  ProjectType: 3,
+  NewProjectPageAppearance: 4
 }
 
-const animationTimeout: number = 980;
+const animationTimeout = 980;
 
 class FrameworkViewModel {
-  public selected: boolean;
-  constructor(public name: string, public code: string) {
+  constructor(name, code) {
+    this.selected = false;
+    this.name = name;
+    this.code = code
   }
 }
 
 class NewProjectViewModel {
-  public name: string;
-  public location: string;
+  constructor() {
+    this.name = null;
+    this.location = null;
+  }
 }
 
 @Component({
-    selector: 'app'
+  selector: 'app'
 })
 @View({
-    templateUrl: './partials/welcome-app.html',
-    directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
+  templateUrl: './partials/welcome-app.html',
+  directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
-export class WelcomeController {
-    state: WindowState;
-    selectedFramework: FrameworkViewModel;
-    newProject: NewProjectViewModel;
-    frameworks: FrameworkViewModel[];
-    constructor(public zone: NgZone) {
+class WelcomeController {
+    constructor(zone: NgZone) {
+      this.zone = zone;
       this.state = WindowState.NewProject;
       this.frameworks = [];
       this.newProject = new NewProjectViewModel();
+      this.selectedFramework = null;
 
-      this.handleEvents();
-      this.getDefaultLocation();
-      this.loadFrameworks();
+      this._handleEvents();
+      this._getDefaultLocation();
+      this._loadFrameworks();
       this.selectFramework(this.frameworks[0]);
 
-      this.logVersions();
+      this._logVersions();
     }
     openProject() {
       ipc.send('application:open-project');
@@ -68,14 +68,14 @@ export class WelcomeController {
         self.state = WindowState.NewProject;
       }), animationTimeout);
     }
-    createNewProject(): void {
+    createNewProject() {
       var meta = new ProjectMeta();
       meta.Name = this.newProject.name;
       meta.FrameworkCode = this.selectedFramework.code;
       meta.Location = this.newProject.location;
       ipc.send('application:create-project', meta);
     }
-    selectFramework(framework: FrameworkViewModel): void {
+    selectFramework(framework) {
       if (this.selectedFramework !== framework) {
         if (this.selectedFramework) {
           this.selectedFramework.selected = false;
@@ -84,27 +84,29 @@ export class WelcomeController {
         this.selectedFramework.selected = true;
       }
     }
-    selectLocation(): void {
+    selectLocation() {
       ipc.send('application:select-location', this.newProject.location);
     }
-    private handleEvents(): void {
+    _handleEvents() {
       var self = this;
-      ipc.on('browser:location-selected', function(location: string) {
+      ipc.on('browser:location-selected', function(location) {
         self.zone.run(() => {
           self.newProject.location = location;
         });
       });
     }
-    private getDefaultLocation(): void {
+    _getDefaultLocation() {
       this.newProject.location = ipc.sendSync('application:get-default-location');
     }
-    private loadFrameworks(): void {
+    _loadFrameworks() {
       this.frameworks.push(new FrameworkViewModel('Cocos2d', 'cocos2d'));
     }
-    private logVersions(): void {
+    _logVersions() {
       var message = 'We are using node ' + process.versions.node +
         ', Chrome ' + process.versions.chrome +
         ', and Electron ' + process.versions.electron;
       console.log(message);
     }
 }
+
+module.exports = WelcomeController;
